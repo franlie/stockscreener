@@ -111,7 +111,7 @@ if st.sidebar.button("Scan"):
                             st.plotly_chart(fig, use_container_width=True)     
 
                         else:
-                            st.image(f"https://charts2-node.finviz.com/chart.ashx?cs=&t={ticker}&tf=d&s=linear&ct=candle_stick&r=&o[0][ot]=sma&o[0][op]={short_ma}&o[0][oc]=FF8F33C6&o[1][ot]=sma&o[1][op]={long_ma}&o[1][oc]=DCB3326D&o[2][ot]=patterns&o[2][op]=&o[2][oc]=000", width=700)
+                            st.image(f"https://charts2-node.finviz.com/chart.ashx?cs=&t={ticker}&tf=d&s=linear&ct=candle_stick&r=&o[0][ot]=ema&o[0][op]={short_ma}&o[0][oc]=FF8F33C6&o[1][ot]=ema&o[1][op]={long_ma}&o[1][oc]=DCB3326D&o[2][ot]=patterns&o[2][op]=&o[2][oc]=000", width=700)
                         
                 except Exception:
                     print("No data on " + ticker)
@@ -144,7 +144,7 @@ if st.sidebar.button("Scan"):
                             )
                             st.plotly_chart(fig, use_container_width=True)     
                         else:
-                            st.image(f"https://charts2-node.finviz.com/chart.ashx?cs=&t={ticker}&tf=d&s=linear&ct=candle_stick&r=&o[0][ot]=sma&o[0][op]={short_ma}&o[0][oc]=FF8F33C6&o[1][ot]=sma&o[1][op]={long_ma}&o[1][oc]=DCB3326D&o[2][ot]=patterns&o[2][op]=&o[2][oc]=000", width=700)
+                            st.image(f"https://charts2-node.finviz.com/chart.ashx?cs=&t={ticker}&tf=d&s=linear&ct=candle_stick&r=&o[0][ot]=ema&o[0][op]={short_ma}&o[0][oc]=FF8F33C6&o[1][ot]=ema&o[1][op]={long_ma}&o[1][oc]=DCB3326D&o[2][ot]=patterns&o[2][op]=&o[2][oc]=000", width=700)
                 except Exception:
                     print("No data on " + ticker)
         st.write("Finished screening. Found " + str(counter) + " stock(s)")
