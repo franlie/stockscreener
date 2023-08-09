@@ -53,15 +53,19 @@ if st.sidebar.button("Scan"):
         else:
             stocks = 'dax'
         
+        # Reading tickers from csv
         stocks = pd.read_csv(f"./tickers/{stocks}.csv")
         tickers = stocks["Symbol"].unique().tolist()
 
+        # Progress Bar settings
         progress_text = "Scanning stocks..."
         my_bar = st.progress(0, text=progress_text)
 
-        
         progress_counter = 0
         increment = 1/len(tickers)
+
+        # Initializing counter for results
+        counter = 0
         # Loop through each ticker and get the data
         for ticker in tickers:
             # Get the adjusted close price data
@@ -82,7 +86,7 @@ if st.sidebar.button("Scan"):
                     if data["MA_short"][-1] > data["MA_long"][-1] and data["MA_short"][-2] < data["MA_long"][-2]:
                         # Print the ticker and the date of the crossover
                         st.write(f"{ticker} had a bullish crossover on {data.index[-1].date()}")
-                        
+                        counter += 1
                         if universe != "S&P 500" and universe != "NASDAQ100":
                             chart_data = go.Candlestick(x=data.index, open=data["Open"], high=data["High"], low=data["Low"], close=data["Close"], name=ticker, increasing_line_color="green", increasing_fillcolor="green", decreasing_line_color="red", decreasing_fillcolor="red")
                             fig = go.Figure(data=[chart_data])
@@ -116,7 +120,7 @@ if st.sidebar.button("Scan"):
                     if data["MA_short"][-1] < data["MA_long"][-1] and data["MA_short"][-2] > data["MA_long"][-2]:
                         # Print the ticker and the date of the crossover
                         st.write(f"{ticker} had a bearish crossover on {data.index[-1].date()}")
-
+                        counter += 1
                         if universe != "S&P 500" and universe != "NASDAQ100":
                             chart_data = go.Candlestick(x=data.index, open=data["Open"], high=data["High"], low=data["Low"], close=data["Close"], name=ticker, increasing_line_color="green", increasing_fillcolor="green", decreasing_line_color="red", decreasing_fillcolor="red")
                             fig = go.Figure(data=[chart_data])
@@ -143,6 +147,6 @@ if st.sidebar.button("Scan"):
                             st.image(f"https://charts2-node.finviz.com/chart.ashx?cs=&t={ticker}&tf=d&s=linear&ct=candle_stick&r=&o[0][ot]=sma&o[0][op]={short_ma}&o[0][oc]=FF8F33C6&o[1][ot]=sma&o[1][op]={long_ma}&o[1][oc]=DCB3326D&o[2][ot]=patterns&o[2][op]=&o[2][oc]=000", width=700)
                 except Exception:
                     print("No data on " + ticker)
-        st.write("Finished screening")
+        st.write("Finished screening. Found " + str(counter) + " stock(s)")
 st.sidebar.write('<span style="font-size: 12px;">(Fetching dynamic charts from finviz for US Stocks, plotting DAX Stocks)</span>', unsafe_allow_html=True)
 
