@@ -4,4 +4,4 @@ datetime
 streamlit
 pandas_datareader
 yfinance
-plotly.graph_objects
+plotly
