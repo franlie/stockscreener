@@ -3,5 +3,5 @@ pandas_ta
 datetime 
 streamlit
 pandas_datareader
-yfinance
+yfinance==0.2.28
 plotly
