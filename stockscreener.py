@@ -1,4 +1,5 @@
 # Import libraries
+from numpy import nan as npNaN
 import pandas as pd
 import pandas_ta as ta
 import datetime as dt
