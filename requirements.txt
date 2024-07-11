@@ -1,5 +1,4 @@
-pip install numpy==1.26.3
-pandas
+numpy==1.26.3
 pandas_ta
 datetime 
 streamlit
